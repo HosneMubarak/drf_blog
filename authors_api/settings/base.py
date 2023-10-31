@@ -96,7 +96,7 @@ WSGI_APPLICATION = "authors_api.wsgi.application"
 # }
 
 DATABASES = {
-    "default": env.db("DATABASES_URL")
+    "default": env.db("DATABASE_URL")
 }
 
 PASSWORD_HASHERS = [

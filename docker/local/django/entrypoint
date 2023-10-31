@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Set Bash options for error handling.
+set -o errexit  # Exit on any command failure
+set -o pipefail # Exit on any command in a pipeline failure
+set -o nounset  # Treat unset variables as an error
+
+# Check if POSTGRES_USER is not set, and if so, set it to the default user 'postgres'.
+if [ -z "${POSTGRES_USER}" ]; then
+  base_postgres_image_default_user='postgres'
+  export POSTGRES_USER="${base_postgres_image_default_user}"
+fi
+
+# Construct the DATABASE_URL using environment variables.
+export DATABASE_URL="postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}"
+
+# Use a Python script to check PostgreSQL availability.
+python << END
+import sys
+import time
+import psycopg2
+
+# Define the time after which an unrecoverable error is suggested (30 seconds).
+suggest_unrecoverable_after = 30
+
+# Start a timer.
+start = time.time()
+
+# Loop to attempt to connect to PostgreSQL until successful.
+while True:
+  try:
+    psycopg2.connect(
+      dbname="${POSTGRES_DB}",
+      user="${POSTGRES_USER}",
+      password="${POSTGRES_PASSWORD}",
+      host="${POSTGRES_HOST}",
+      port="${POSTGRES_PORT}",
+    )
+    break
+  except psycopg2.OperationalError as error:
+    sys.stderr.write("Waiting for PostgreSQL to become available...\n")
+    
+    # Check if waiting for PostgreSQL is taking too long.
+    if time.time() - start > suggest_unrecoverable_after:
+      sys.stderr.write("This is taking longer than expected. The following exception may be indicative of an unrecoverable error: '{}'\n".format(error))
+    
+    # Sleep for 1 second and then retry the connection.
+    time.sleep(1)
+
+# PostgreSQL is available.
+END
+
+# Print a message indicating that PostgreSQL is available.
+>&2 echo "PostgreSQL is available"
+
+# Execute the command passed as arguments to the script.
+exec "$@"

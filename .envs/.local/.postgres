@@ -1,0 +1,6 @@
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=authors-db
+POSTGRES_USER=hosne_mubarak
+POSTGRES_PASSWORD=121212king
+DATABASE_URL=postgres://hosne_mubarak:121212king@postgres:5432/authors-db
