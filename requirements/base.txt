@@ -1,0 +1,14 @@
+django==4.1.7  # Web framework for building robust and scalable web applications in Python.
+django-environ==0.10.0  # Simplifies handling environment variables in Django projects.
+djangorestframework==3.14.0  # Powerful and flexible toolkit for building Web APIs.
+django-cors-headers==4.3.0  # Adds Cross-Origin Resource Sharing (CORS) headers support to Django.
+django-filter==22.1  # Provides a simple way to filter querysets dynamically in Django.
+django-autoslug==1.9.8  # Automatically creates slugs for Django models.
+django-countries==7.5.1  # A Django app for adding country fields to models.
+django-phonenumber-field==7.0.2  # Provides a model and form field for phone numbers in Django.
+phonenumbers==8.13.7  # Library for working with phone numbers in Python.
+drf-yasg==1.21.5  # Yet another Swagger generator for Django REST framework.
+Pillow==9.4.0  # Python Imaging Library (PIL) fork for handling images in Django.
+argon2-cffi==21.3.0  # Password hashing library using the Argon2 algorithm.
+pytz==2022.7.1  # Timezone definitions and utilities for Python.
+django-taggit==3.1.0  # Simple tagging for Django.
