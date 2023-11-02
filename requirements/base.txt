@@ -1,4 +1,4 @@
-django==4.1.7  # Web framework for building robust and scalable web applications in Python.
+django==4.1.13  # Web framework for building robust and scalable web applications in Python.
 django-environ==0.10.0  # Simplifies handling environment variables in Django projects.
 djangorestframework==3.14.0  # Powerful and flexible toolkit for building Web APIs.
 django-cors-headers==4.3.0  # Adds Cross-Origin Resource Sharing (CORS) headers support to Django.
