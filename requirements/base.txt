@@ -12,3 +12,7 @@ Pillow==9.4.0  # Python Imaging Library (PIL) fork for handling images in Django
 argon2-cffi==21.3.0  # Password hashing library using the Argon2 algorithm.
 pytz==2022.7.1  # Timezone definitions and utilities for Python.
 django-taggit==3.1.0  # Simple tagging for Django.
+redis==4.5.1
+celery==5.2.7
+flower==1.2.0
+django-celery-email==3.0.0
